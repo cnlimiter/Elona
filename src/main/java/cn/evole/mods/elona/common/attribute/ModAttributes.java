@@ -20,14 +20,6 @@ public class ModAttributes {
 
 
     public static final RegistryObject<Attribute> STRENGTH = ATTRIBUTES.register("elona.strength", () -> new BaseAttribute("attribute.name.elona.strength", 20.0D, 1.0D, 1024.0D));
-    public static final RegistryObject<Attribute> CONSTITUTION = ATTRIBUTES.register("elona.constitution", () -> new BaseAttribute("attribute.name.elona.constitution", 20.0D, 1.0D, 1024.0D));
-    public static final RegistryObject<Attribute> DEXTERITY = ATTRIBUTES.register("elona.dexterity", () -> new BaseAttribute("attribute.name.elona.dexterity", 20.0D, 1.0D, 1024.0D));
-    public static final RegistryObject<Attribute> PERCEPTION = ATTRIBUTES.register("elona.perception", () -> new BaseAttribute("attribute.name.elona.perception", 20.0D, 1.0D, 1024.0D));
-    public static final RegistryObject<Attribute> LEARNING = ATTRIBUTES.register("elona.learning", () -> new BaseAttribute("attribute.name.elona.learning", 20.0D, 1.0D, 1024.0D));
-    public static final RegistryObject<Attribute> WILL = ATTRIBUTES.register("elona.will", () -> new BaseAttribute("attribute.name.elona.will", 20.0D, 1.0D, 1024.0D));
-    public static final RegistryObject<Attribute> MAGIC = ATTRIBUTES.register("elona.magic", () -> new BaseAttribute("attribute.name.elona.magic", 20.0D, 1.0D, 1024.0D));
-    public static final RegistryObject<Attribute> CHARISMA = ATTRIBUTES.register("elona.charisma", () -> new BaseAttribute("attribute.name.elona.charisma", 20.0D, 1.0D, 1024.0D));
-
 
 
     public static void register(IEventBus event){

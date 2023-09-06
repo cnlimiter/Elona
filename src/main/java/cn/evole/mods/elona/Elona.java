@@ -1,26 +1,23 @@
 package cn.evole.mods.elona;
 
+import cn.evole.mods.elona.api.util.FileUtil;
 import cn.evole.mods.elona.common.attribute.ModAttributes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
-import net.minecraftforge.event.server.ServerStartingEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 
-// The value here should match an entry in the META-INF/mods.toml file
+import static cn.evole.mods.elona.Static.ELONA_FOLDER;
+
 @Mod(Static.MOD_ID)
 public class Elona
 {
-    public static final String MODID = "examplemod";
 
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
+    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Static.MOD_ID);
 
 
 //    public static final RegistryObject<CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
@@ -32,18 +29,17 @@ public class Elona
 
     public Elona()
     {
+        FileUtil.checkFolder(ELONA_FOLDER.toPath());
+
         var modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
-        ModAttributes.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
-
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(this::addCreative);
-
         MinecraftForge.EVENT_BUS.register(this);
 
-
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        ModAttributes.register(modEventBus);
+        ModConfig.register();
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)
@@ -57,9 +53,5 @@ public class Elona
 //            event.accept(EXAMPLE_BLOCK_ITEM);
     }
 
-    @SubscribeEvent
-    public void onServerStarting(ServerStartingEvent event)
-    {
-    }
 
 }

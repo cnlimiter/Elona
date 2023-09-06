@@ -1,5 +1,8 @@
 package cn.evole.mods.elona.common.attribute;
 
+
+import net.minecraftforge.event.entity.player.PlayerEvent;
+
 /**
  * Name: Elona / PlayerAttributeHandler
  * Author: cnlimiter
@@ -9,7 +12,8 @@ package cn.evole.mods.elona.common.attribute;
 
 public class PlayerAttributeHandler {
 
-    public static void serverStartedInit(){
+    public static void playerAttributeLoad(PlayerEvent.PlayerLoggedInEvent event){
+
     }
 
 }
