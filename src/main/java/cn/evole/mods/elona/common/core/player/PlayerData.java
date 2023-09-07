@@ -22,6 +22,10 @@ public class PlayerData implements Serializable {
     private final String playerUUID;
     //玩家主能力
     private MainAttributes attributes;
+    //玩家状态
+    private MainStats stats;
+    //玩家信息
+    private MainAdditions additions;
     //好友uuid列表
     private List<String> friendsUUID;
 
@@ -35,28 +39,34 @@ public class PlayerData implements Serializable {
     public PlayerData(String playerUUID) {
         this.playerUUID = playerUUID;
         this.attributes = new MainAttributes();
+        this.stats = new MainStats();
+        this.additions = new MainAdditions();
         this.friendsUUID = new ArrayList<>();
     }
 
     public PlayerData(PlayerDataPkt pack) {
         this.playerUUID = pack.getPlayerUUID();
         this.attributes = pack.getAttributes();
+        this.stats = new MainStats();
+        this.additions = new MainAdditions();
         this.friendsUUID = new ArrayList<>();
     }
 
     public PlayerData(FriendsDataPkt pack) {
         this.playerUUID = pack.getPlayerUUID();
         this.attributes = new MainAttributes();
+        this.stats = new MainStats();
+        this.additions = new MainAdditions();
         this.friendsUUID = pack.getFriendsUUID();
     }
 
     public void update(PlayerData data) {
         if (data != null && this.playerUUID.equals(data.playerUUID)) {
-            if (data.getAttributes().getXpLast() > 0) {
-                this.attributes.setXpLast(data.getAttributes().getXpLast());
+            if (data.getStats().getXpLast() > 0) {
+                this.stats.setXpLast(data.getStats().getXpLast());
             }
-            if (data.getAttributes().getXp() > 0) {
-                this.attributes.setXp(data.attributes.getXp());
+            if (data.getStats().getXp() > 0) {
+                this.stats.setXp(data.stats.getXp());
             }
             if (data.getFriendsUUID() != null && !data.getFriendsUUID().isEmpty()) {
                 this.friendsUUID = data.getFriendsUUID();
@@ -80,12 +90,12 @@ public class PlayerData implements Serializable {
      * @param amount 值
      */
     public void addXp(int amount) {
-        this.attributes.setXpLast(this.attributes.getXp());
-        this.attributes.setXp(this.attributes.getXp() + amount);
+        this.stats.setXpLast(this.stats.getXp());
+        this.stats.setXp(this.stats.getXp() + amount);
         //限制最高等级
         int lvPoint = PlayerDataManager.getLvNextXpPoint(ModConfig.max_level - 1);
-        if (lvPoint != 0 && this.attributes.getXp() > lvPoint) {
-            this.attributes.setXp(lvPoint);
+        if (lvPoint != 0 && this.stats.getXp() > lvPoint) {
+            this.stats.setXp(lvPoint);
         }
     }
 

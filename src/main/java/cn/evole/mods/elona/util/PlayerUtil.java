@@ -18,12 +18,12 @@ public class PlayerUtil {
     private static final int HP_MAX_OFFSET = 20;
 
     public static void onClone(Player player, PlayerData data, boolean heal) {
-        fixMaxHp(player, PlayerDataManager.getLv(data.getAttributes().getXp()), heal);
+        fixMaxHp(player, PlayerDataManager.getLv(data.getStats().getXp()), heal);
     }
 
     public static void onLvUp(Player player, PlayerData playerData) {
-        final int lv = PlayerDataManager.getLv(playerData.getAttributes().getXp());
-        if (lv - PlayerDataManager.getLv(playerData.getAttributes().getXpLast()) > 0) {
+        final int lv = PlayerDataManager.getLv(playerData.getStats().getXp());
+        if (lv - PlayerDataManager.getLv(playerData.getStats().getXpLast()) > 0) {
             fixMaxHp(player, lv, true);
         }
     }
