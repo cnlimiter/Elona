@@ -1,7 +1,7 @@
 package cn.evole.mods.elona.common.net.pkt;
 
 import cn.evole.mods.elona.api.common.net.IPacket;
-import cn.evole.mods.elona.common.core.player.PlayerAttributes;
+import cn.evole.mods.elona.common.core.player.MainAttributes;
 import cn.evole.mods.elona.common.core.player.PlayerData;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,12 +25,12 @@ public class PlayerDataPkt extends IPacket<PlayerDataPkt> {
     private final String message;
     private final String playerUUID;
     //玩家主能力
-    private PlayerAttributes attributes;
+    private MainAttributes attributes;
 
     public PlayerDataPkt(String message) {
         this.message = message;
         this.playerUUID = "null";
-        this.attributes = new PlayerAttributes();
+        this.attributes = new MainAttributes();
     }
 
     public PlayerDataPkt(String message, PlayerData data) {
@@ -40,7 +40,7 @@ public class PlayerDataPkt extends IPacket<PlayerDataPkt> {
     }
     @Override
     public PlayerDataPkt read(FriendlyByteBuf buf) {
-        return new PlayerDataPkt(buf.readUtf(Short.MAX_VALUE), buf.readUtf(Short.MAX_VALUE), PlayerAttributes.readBuf(buf));
+        return new PlayerDataPkt(buf.readUtf(Short.MAX_VALUE), buf.readUtf(Short.MAX_VALUE), MainAttributes.readBuf(buf));
     }
 
     @Override

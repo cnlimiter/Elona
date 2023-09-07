@@ -21,7 +21,7 @@ public class PlayerData implements Serializable {
     private static final long serialVersionUID = -3997902693840980675L;
     private final String playerUUID;
     //玩家主能力
-    private PlayerAttributes attributes;
+    private MainAttributes attributes;
     //好友uuid列表
     private List<String> friendsUUID;
 
@@ -34,7 +34,7 @@ public class PlayerData implements Serializable {
 
     public PlayerData(String playerUUID) {
         this.playerUUID = playerUUID;
-        this.attributes = new PlayerAttributes();
+        this.attributes = new MainAttributes();
         this.friendsUUID = new ArrayList<>();
     }
 
@@ -46,7 +46,7 @@ public class PlayerData implements Serializable {
 
     public PlayerData(FriendsDataPkt pack) {
         this.playerUUID = pack.getPlayerUUID();
-        this.attributes = new PlayerAttributes();
+        this.attributes = new MainAttributes();
         this.friendsUUID = pack.getFriendsUUID();
     }
 

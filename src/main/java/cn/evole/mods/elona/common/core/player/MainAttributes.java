@@ -15,7 +15,7 @@ import java.io.Serializable;
  */
 @Data
 @AllArgsConstructor
-public class PlayerAttributes implements Serializable {
+public class MainAttributes implements Serializable {
     @Serial
     private static final long serialVersionUID = 2316145084813546665L;
     //力量
@@ -34,34 +34,23 @@ public class PlayerAttributes implements Serializable {
     private int magic;
     //魅力
     private int charisma;
-    //上次保存的法力
-    private int mpLast;
-    //最大法力
-    private int mp;
-    //上次保存的经验
-    private int xpLast;
-    //最大经验
-    private int xp;
 
-    public PlayerAttributes(){
-        this.strength = 0;
-        this.constitution = 0;
-        this.dexterity = 0;
-        this.perception = 0;
-        this.learning = 0;
-        this.will = 0;
-        this.magic = 0;
-        this.charisma = 0;
-        this.mpLast = 0;
-        this.mp = 0;
-        this.xpLast = 0;
-        this.xp = 0;
+
+    public MainAttributes(){
+        this.strength = 100;
+        this.constitution = 100;
+        this.dexterity = 100;
+        this.perception = 100;
+        this.learning = 100;
+        this.will = 100;
+        this.magic = 100;
+        this.charisma = 100;
     }
 
-    public static PlayerAttributes readBuf(FriendlyByteBuf buf){
-        return new PlayerAttributes(buf.readInt(), buf.readInt(), buf.readInt(), buf.readInt(),
-                buf.readInt(), buf.readInt(), buf.readInt(), buf.readInt(),
-                buf.readInt(), buf.readInt(), buf.readInt(), buf.readInt());
+    public static MainAttributes readBuf(FriendlyByteBuf buf){
+        return new MainAttributes(buf.readInt(), buf.readInt(), buf.readInt(), buf.readInt(),
+                buf.readInt(), buf.readInt(), buf.readInt(), buf.readInt()
+                );
     }
 
     public void writeBuff(FriendlyByteBuf buf){
@@ -73,10 +62,6 @@ public class PlayerAttributes implements Serializable {
         buf.writeInt(this.will);
         buf.writeInt(this.magic);
         buf.writeInt(this.charisma);
-        buf.writeInt(this.mpLast);
-        buf.writeInt(this.mp);
-        buf.writeInt(this.xpLast);
-        buf.writeInt(this.xp);
     }
 
 }

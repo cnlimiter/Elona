@@ -1,4 +1,4 @@
-package cn.evole.mods.elona.api.util;
+package cn.evole.mods.elona.util;
 
 import java.io.IOException;
 import java.nio.file.Files;
