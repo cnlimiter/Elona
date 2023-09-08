@@ -29,7 +29,12 @@ public class Static {
     public static HikariConfig dataConfig = new HikariConfig();
 
     static {
-        dataConfig.setJdbcUrl("jdbc:sqlite:" + ELONA_FOLDER.getAbsolutePath() + "/" + "test" + ".db");
+        dataConfig.setPoolName("SQLiteConnectionPool");
+        dataConfig.setDriverClassName("org.sqlite.JDBC");
+        dataConfig.setJdbcUrl("jdbc:sqlite:" + ELONA_FOLDER.getAbsolutePath() + "\\" + "test" + ".db");
+        dataConfig.setAutoCommit(false);
+        dataConfig.setMinimumIdle(8);
+        dataConfig.setMaximumPoolSize(32);
     }
 
     //数据源
