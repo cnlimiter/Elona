@@ -1,5 +1,6 @@
 package cn.evole.mods.elona.common.core.friend;
 
+import lombok.Getter;
 import net.minecraft.server.level.ServerPlayer;
 
 /**
@@ -9,6 +10,7 @@ import net.minecraft.server.level.ServerPlayer;
  * Description:
  */
 
+@Getter
 public class Friend {
     private String uuid;
     private String name;
@@ -18,16 +20,8 @@ public class Friend {
         this.name = name;
     }
 
-    public String getUuid() {
-        return uuid;
-    }
-
     public void setUuid(String uuid) {
         this.uuid = uuid;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public void setName(String name) {

@@ -1,9 +1,13 @@
 package cn.evole.mods.elona;
 
 import com.mojang.logging.LogUtils;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import net.minecraftforge.fml.loading.FMLPaths;
+import org.noear.wood.DbContext;
 import org.slf4j.Logger;
 
+import javax.sql.DataSource;
 import java.io.File;
 
 /**
@@ -14,9 +18,26 @@ import java.io.File;
  */
 
 public class Static {
+
     public static final String MOD_ID = "elona";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
+
+    //elona数据文件夹
     public static File ELONA_FOLDER = FMLPaths.GAMEDIR.relative().resolve("elona_data").toFile();
+
+    //Hikari配置
+    public static HikariConfig dataConfig = new HikariConfig();
+
+    static {
+        dataConfig.setJdbcUrl("jdbc:sqlite:" + ELONA_FOLDER.getAbsolutePath() + "/" + "test" + ".db");
+    }
+
+    //数据源
+    public static final DataSource dataSource = new HikariDataSource(dataConfig);
+
+    //玩家数据
+    public static final DbContext player_data = new DbContext("player_data", dataSource);
+
 
 
 }

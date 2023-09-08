@@ -73,6 +73,10 @@ repositories {
 dependencies {
     minecraft "net.neoforged:forge:${minecraft_version}-${neo_version}"
 
+    // SQL Drivers
+    implementation("org.xerial:sqlite-jdbc:${project.sqlite_version}")
+    implementation("com.zaxxer:HikariCP:${project.hikariCP_version}")
+    implementation("org.noear:wood:${project.wood_version}")
 
 
     // lombok

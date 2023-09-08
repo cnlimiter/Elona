@@ -1,6 +1,8 @@
 package cn.evole.mods.elona.common.core.player;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import net.minecraft.network.FriendlyByteBuf;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -12,6 +14,7 @@ import java.io.Serializable;
  * Description:
  */
 @Data
+@AllArgsConstructor
 public class MainAdditions implements Serializable {
 
     @Serial
@@ -32,4 +35,33 @@ public class MainAdditions implements Serializable {
     private int faith;
     //势力
     private int guild;
+
+    public MainAdditions(){
+        this.gender = 0;
+        this.role = 0;
+        this.origin = 0;
+        this.title = 0;
+        this.father = 0;
+        this.mother = 0;
+        this.faith = 0;
+        this.guild = 0;
+    }
+
+
+    public static MainAdditions readBuf(FriendlyByteBuf buf){
+        return new MainAdditions(buf.readInt(), buf.readInt(), buf.readInt(), buf.readInt(),
+                buf.readInt(), buf.readInt(), buf.readInt(), buf.readInt()
+        );
+    }
+
+    public void writeBuff(FriendlyByteBuf buf){
+        buf.writeInt(this.gender);
+        buf.writeInt(this.role);
+        buf.writeInt(this.origin);
+        buf.writeInt(this.title);
+        buf.writeInt(this.father);
+        buf.writeInt(this.mother);
+        buf.writeInt(this.faith);
+        buf.writeInt(this.guild);
+    }
 }
