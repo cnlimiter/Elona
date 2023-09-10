@@ -1,13 +1,20 @@
-package cn.evole.mods.elona.common.save;
+package cn.evole.mods.elona.init.handler;
 
 import cn.evole.mods.elona.Static;
 import cn.evole.mods.elona.common.core.player.PlayerData;
 import cn.evole.mods.elona.common.core.player.PlayerDataManager;
+import cn.evole.mods.elona.common.net.pkt.PlayerDataPkt;
 import cn.evole.mods.elona.util.PlayerUtil;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.Level;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.network.PacketDistributor;
 
 /**
  * Name: Elona-forged / SaveEventHandler
@@ -38,5 +45,19 @@ public class SaveEventHandler {
         Player player = event.getEntity();
         PlayerData playerData = PlayerDataManager.get(player.getStringUUID());
         PlayerUtil.onClone(player, playerData, event.isWasDeath());
+    }
+
+    @SubscribeEvent
+    public static void onEntityJoinLevel(EntityJoinLevelEvent event) {
+        Level level = event.getLevel();
+        Entity entity = event.getEntity();
+        if (!level.isClientSide()) {
+            //todo 同步除玩家外其他实体数据
+        }
+        else if (!level.isClientSide() && entity instanceof ServerPlayer) {
+            //同步模组玩家数据到客户端
+            PlayerDataPkt pack = new PlayerDataPkt("elona.player.status.async", PlayerDataManager.get(entity.getStringUUID()));
+            NetWorkHandler.PLAYER_DATA.send(PacketDistributor.PLAYER.with(() -> (ServerPlayer) entity), pack);
+        }
     }
 }

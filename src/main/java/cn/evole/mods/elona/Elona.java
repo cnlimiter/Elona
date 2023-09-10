@@ -1,5 +1,6 @@
 package cn.evole.mods.elona;
 
+import cn.evole.mods.elona.init.config.ModConfig;
 import cn.evole.mods.elona.util.FileUtil;
 import cn.evole.mods.elona.common.attribute.ModAttributes;
 import net.minecraft.core.registries.Registries;

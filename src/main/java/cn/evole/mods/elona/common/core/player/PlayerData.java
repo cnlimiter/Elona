@@ -1,6 +1,6 @@
 package cn.evole.mods.elona.common.core.player;
 
-import cn.evole.mods.elona.ModConfig;
+import cn.evole.mods.elona.init.config.ModConfig;
 import cn.evole.mods.elona.Static;
 import cn.evole.mods.elona.common.net.pkt.FriendsDataPkt;
 import cn.evole.mods.elona.common.net.pkt.PlayerDataPkt;
@@ -8,7 +8,6 @@ import lombok.Data;
 import org.noear.wood.DbContext;
 
 import java.io.*;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 

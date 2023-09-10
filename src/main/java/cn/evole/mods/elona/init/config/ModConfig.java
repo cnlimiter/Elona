@@ -1,5 +1,6 @@
-package cn.evole.mods.elona;
+package cn.evole.mods.elona.init.config;
 
+import cn.evole.mods.elona.Static;
 import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModLoadingContext;

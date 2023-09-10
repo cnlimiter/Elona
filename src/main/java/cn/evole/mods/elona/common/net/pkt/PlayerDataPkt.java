@@ -1,16 +1,15 @@
 package cn.evole.mods.elona.common.net.pkt;
 
 import cn.evole.mods.elona.api.common.net.IPacket;
-import cn.evole.mods.elona.common.core.player.MainAdditions;
-import cn.evole.mods.elona.common.core.player.MainAttributes;
-import cn.evole.mods.elona.common.core.player.MainStats;
-import cn.evole.mods.elona.common.core.player.PlayerData;
+import cn.evole.mods.elona.common.core.player.*;
+import cn.evole.mods.elona.init.handler.NetWorkHandler;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkEvent;
+import net.minecraftforge.network.PacketDistributor;
 
 import java.util.function.Supplier;
 
@@ -32,6 +31,13 @@ public class PlayerDataPkt extends IPacket<PlayerDataPkt> {
     private MainStats stats;
     //玩家主信息
     private MainAdditions additions;
+    public PlayerDataPkt() {
+        this.message = "null";
+        this.playerUUID = "null";
+        this.attributes = new MainAttributes();
+        this.stats = new MainStats();
+        this.additions = new MainAdditions();
+    }
     public PlayerDataPkt(String message) {
         this.message = message;
         this.playerUUID = "null";
@@ -68,12 +74,15 @@ public class PlayerDataPkt extends IPacket<PlayerDataPkt> {
         ctx.get().enqueueWork(() -> {
             if (sender == null) {
                 switch (this.message) {
-                    case "elona.player.status.async" -> {}
+                    case "elona.player.status.async" -> PlayerDataManager.put(new PlayerData(this));
                     case "elona.player.status.client" -> {}
                 }
             } else {
                 switch (this.message) {
-                    case "elona.player.status.open" -> {}
+                    case "elona.player.status.open" -> {
+                        PlayerDataPkt pack = new PlayerDataPkt("elona.player.status.client", PlayerDataManager.get(sender.getStringUUID()));
+                        NetWorkHandler.PLAYER_DATA.send(PacketDistributor.PLAYER.with(() -> sender), pack);
+                    }
                 }
             }
         });

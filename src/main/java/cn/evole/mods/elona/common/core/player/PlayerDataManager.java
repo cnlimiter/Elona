@@ -1,6 +1,6 @@
 package cn.evole.mods.elona.common.core.player;
 
-import cn.evole.mods.elona.ModConfig;
+import cn.evole.mods.elona.init.config.ModConfig;
 
 import java.util.ArrayList;
 import java.util.HashMap;

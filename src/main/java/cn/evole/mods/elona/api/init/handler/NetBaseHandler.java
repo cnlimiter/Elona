@@ -25,13 +25,10 @@ public class NetBaseHandler {
     private int id = 0;
 
     public NetBaseHandler(ResourceLocation id) {
-        this.channel = NetworkRegistry.newSimpleChannel(id, () -> {
-            return "1.0";
-        }, (s) -> {
-            return true;
-        }, (s) -> {
-            return true;
-        });
+        this.channel = NetworkRegistry.newSimpleChannel(id,
+                () -> "1.0",
+                (s) -> true,
+                (s) -> true);
     }
 
     public <T extends IPacket<T>> void register(Class<T> clazz, IPacket<T> message) {
